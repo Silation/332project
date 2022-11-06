@@ -1,10 +1,10 @@
 # CSED-332project / Weekly Progress
 
-### **Week 1**
 
+### **Week 1**  
 ---
 
-**Progress of Week 1**
+**Progress of Week 1**  
 
 - 첫 팀 미팅을 가져 앞으로의 미팅 계획, 협업 등을 논의했다. Git Repo를 개설했다.
 - 주차별로 대략적인 계획을 세웠다.
@@ -36,6 +36,8 @@
     ex) Parallel Computing with Scala, gRPC, Gensort …
     
 
+<br/>
+
 ### **Week 2**
 
 ---
@@ -50,7 +52,7 @@
     - Distributed File System에서 수행되는 MapReduce 작업이 끝나면 HDFS에 파일이 써짐
     - MapReduce 작업이 시작할때는 HDFS로 부터 파일을 가져오는 작업이 수행됨
 
-![Untitled](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/Untitled.png)
+![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/Untitled.png)
 
 **Goal of Week 2**
 
@@ -61,8 +63,10 @@
 - 조은국, 김은채, 이창우 (공통):
     - 학습한 내용을 바탕으로 코딩 계획을 계략적으로 각자 구상해온다.
     - 미팅 이후 파트를 나눠 각자 담당한 파트에 대한 코딩 계획을 구체화하고 공유한다. (Input+partitioning / Sorting / Shuffling+Merging)
-    
 
+
+<br/>
+  
 ### **Week 3**
 
 ---
