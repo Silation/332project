@@ -1,5 +1,6 @@
-# CSED-332project / Weekly Progress
-
+# 332project -  Weekly Progress
+(11/16): Progress slides deadline  
+(12/09): Project deadline
 
 <br/>  
 
