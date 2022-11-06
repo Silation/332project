@@ -1,7 +1,10 @@
 # CSED-332project / Weekly Progress
 
 
-### **Week 1**  
+<br/>  
+
+
+## **Week 1**  
 ---
 
 **Progress of Week 1**  
@@ -23,9 +26,13 @@
 | week8 | 12/9 | Performance Enhancing3 + 발표 준비 |
 |  | 12/13, 12/15 | 최종 발표 |
 
+<br/>  
+
 **Goal of Week 1**
 
 - 다음 미팅 때 프로젝트의 전반적 뼈대와 계획을 논의할 수 있을 만큼, 그 전까지 필요한 배경 지식들, 자료들을 수집하고 학습한다.
+
+<br/>  
 
 **Goal of the week for individual**
 
@@ -38,7 +45,7 @@
 
 <br/>
 
-### **Week 2**
+## **Week 2**
 
 ---
 
@@ -54,9 +61,13 @@
 
 ![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/Untitled.png)
 
+<br/>  
+
 **Goal of Week 2**
 
 - 시험 일정으로 인해 정해진 시간에 만나진 못했는데, 미팅 시간을 조율하여 학습한 내용들을 토대로 문제를 분석한다. 또한 프로젝트의 단계를 분할하여, 각 단계별 구체적 계획을 논의한다.
+
+<br/>  
 
 **Goal of the week for individual**
 
@@ -67,7 +78,7 @@
 
 <br/>
   
-### **Week 3**
+## **Week 3**
 
 ---
 
@@ -75,6 +86,9 @@
 
 - 프로그램의 전반적 flow, (Master-Worker connection, Sampling&Pivoting, sorting)를 학습하였다.
 - Scala의 GRPC와 Gensort의 동작을 학습하였다.
+
+
+<br/>  
 
 **Goal of Week 3**
 
@@ -85,6 +99,9 @@
     - master 주소를 매개로 slave-master 연결
     - master가 slave의 ip 주소 출력하도록 구현
 - 전반적 진행이 더디다 판단되어, 11/10 (목) 22:30까지 해당 tasks를 수행하고 미팅을 갖는다. 이후 추가적으로 goals update 예정.
+
+
+<br/>  
 
 **Goal of the week for individual ( ~ 11/10(목) )**
 
