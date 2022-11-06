@@ -20,8 +20,7 @@
 | week2 | 10/28 | (Planning) 개념 스터디 및 공유 |
 | week3 | 11/4 | (Planning) 구체적 코딩 계획 확정 |
 | week4 | 11/11 | (Coding) 기본 sorting / Challenge 1 |
-| week5 | 11/18
-*(11/16)중간 발표 | (Coding) Challenge 2 |
+| week5 | 11/18<br/>*(11/16)중간 발표 | (Coding) Challenge 2 |
 | week6 | 11/25 | (Component test) Debug + Performance Enhancing 1 |
 | week7 | 12/2 | (Program test) Debug + Performance Enhancing 2 |
 | week8 | 12/9 | Performance Enhancing3 + 발표 준비 |
