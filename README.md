@@ -112,3 +112,34 @@
 - [TBD 1]: master ip, port 출력 구현
 - [TBD 2]: master 주소를 매개로 slave-master 연결
 - [TBD 3]: master의 slave ip 주소 출력 구현
+
+
+<br/>
+  
+## **Week 4**
+
+---
+
+**Progress of Week 4**
+
+- 이창우
+    - gRPC, ScalaPB관련 조사
+    - master-slave 코드 복기
+- 김은채
+    - zio-gRPC 구현(진행중)
+- 조은국
+    - zio-gRPC 구현 완료(server, client 확인)
+    - Linux에서 gensort 테스트 완료
+
+<br/>  
+
+**Goal of the week for individual ( ~ 11/16(수) )**
+
+- 발표 역할 분담
+    - 김은채: 발표
+    - 조은국: 발표 자료 제작
+    - 이창우: 발표에 쓰일 document 제작
+- 개발
+    - zio-gRPC로 IP, Port 출력
+    - master-slave 구조 디자인
+    - zio-gRPC server->client 자료 전송 테스트(김은채)
