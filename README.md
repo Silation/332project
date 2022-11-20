@@ -154,7 +154,7 @@
 
 - 이창우
     - zio-gRPC document 제작
-    - 개인 기기 세팅 (sbt, zio-gRPC example, scala의 학습)
+    - 환경 세팅 (sbt, zio-gRPC example, scala의 학습)
 - 김은채
     - 중간발표
     - 제공되는 가상환경과 intellij 연결, 연결 과정 document 제작
@@ -162,6 +162,8 @@
 - 조은국
     - 기본적 sort 기능 구현
     - gensort generated data와 sorted data 업로드 (shffling 단계의 독립적 test를 위해)
+
+<br/>  
 
 **Goal of the week for individual**
 
