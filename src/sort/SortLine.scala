@@ -1,10 +1,10 @@
 import scala.io.Source.fromFile
 import java.io._
 
-val workerNum = 5
-
 
 object LineSort (val lines: List[String]) List[String] = {
+    val workerNum = 5
+    
     def main(args: Array[String]) {
         val sorted_lines = lines.sorted
     }
