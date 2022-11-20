@@ -143,3 +143,37 @@
     - zio-gRPC로 IP, Port 출력
     - master-slave 구조 디자인
     - zio-gRPC server->client 자료 전송 테스트(김은채)
+
+<br/>
+
+## **Week 5**
+
+---
+
+**Progress of Week 3**
+
+- 이창우
+    - zio-gRPC document 제작
+    - 개인 기기 세팅 (sbt, zio-gRPC example, scala의 학습)
+- 김은채
+    - 중간발표
+    - 제공되는 가상환경과 intellij 연결, 연결 과정 document 제작
+    - master-worker 데이터 전송 관련 psudocode 제작, 함수 설계
+- 조은국
+    - 기본적 sort 기능 구현
+    - gensort generated data와 sorted data 업로드 (shffling 단계의 독립적 test를 위해)
+
+**Goal of the week for individual**
+
+- 이창우(Shuffling**)**
+    - sort된 두개의 데이터를 제공했을 때, 하나의 서버 내에서 merge하는 코드 작성
+    - VM에서 Master-Worker data 전달하기
+    
+- 김은채(Sampling)
+    - Worker, Master data 전달 구현
+    - 서버간 sampled data, pivot data 전달 테스트
+
+- 조은국(Sorting)
+    - 각 서버에서 Sorting 구현 및 테스트
+    - Sample data를 Master에서 추출하는 방식 시도
+    - 데이터 타입, 함수 형식 document 만들기
