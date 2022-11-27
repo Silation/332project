@@ -167,7 +167,7 @@
 
 **Goal of the week for individual**
 
-- 이창우(Shuffling**)**
+- 이창우(Shuffling)
     - sort된 두개의 데이터를 제공했을 때, 하나의 서버 내에서 merge하는 코드 작성
     - VM에서 Master-Worker data 전달하기
     
@@ -202,7 +202,7 @@
 
 **Goal of the week for individual**
 
-- 이창우(Shuffling**)**
+- 이창우(Shuffling)
     - Data input이 있을 때의 Shuffling 구현
     - VM에서 Master-Worker data 전달하기
     
