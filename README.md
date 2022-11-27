@@ -179,3 +179,40 @@
     - 각 서버에서 Sorting 구현 및 테스트
     - Sample data를 Master에서 추출하는 방식 시도
     - 데이터 타입, 함수 형식 document 만들기
+
+
+<br/>
+
+## **Week 6**
+
+---
+
+**Progress of Week 6**
+
+- 이창우
+    - Shuffling skeleton code 작성
+- 김은채
+    - sampling algorithm 구현
+        - initDataSending(Master가 Worker node들에게 데이터 전달)
+        - definePivot(list grouped 이용)
+    - Worker, Master string list 전달 구현(진행 중)
+- 조은국
+    - 서버간 Seq[String] type의 데이터 전달 (rough)
+    - 각 서버에서 Sort 함수 (진행중 → )
+
+**Goal of the week for individual**
+
+- 이창우(Shuffling**)**
+    - Data input이 있을 때의 Shuffling 구현
+    - VM에서 Master-Worker data 전달하기
+    
+- 김은채(Sampling)
+    - Worker, Master string list 전달 구현 완료
+
+- 조은국(Sorting)
+    - 진행 부분 완수
+    - Sampling에 맞춰서 코드 조정
+    - 데이터 타입, 함수 형식 document 만들기
+
+- 공통
+    - 각자 구현한 기능 합치고 VM 환경에서 테스트
