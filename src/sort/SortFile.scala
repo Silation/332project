@@ -6,12 +6,12 @@ object FileSort {
     
     def main(args: Array[String]) {
         val empPath = "pennyinput"
-        val gensortLines = List() ++ (          
-            for{                                
-                line <- fromFile(empPath).getLines  
-            }yield line                 
-        ) 
-        
+        val gensortLines = List() ++ (
+            for{
+                line <- fromFile(empPath).getLines
+            }yield line
+        )
+
         val sorted_lines = gensortLines.sorted
 
         val filename = "sorted_" + empPath
