@@ -241,9 +241,9 @@
 
 **Goal of the week for individual**
 
-(금요알 대면 미팅 이전까지 ~)
+(금요일 대면 미팅 이전까지 ~)
 
-- 이창우(Shuffling**)**
+- 이창우(Shuffling)
     - Shuffling 완성
     - 전체 테스트 로직 구상
 - 김은채(Sampling)
