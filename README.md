@@ -216,3 +216,41 @@
 
 - 공통
     - 각자 구현한 기능 합치고 VM 환경에서 테스트
+
+
+
+<br/>
+
+# 12/04
+
+## **Week 7**
+
+---
+
+**Progress of Week 7**
+
+- 이창우
+    - 테스트 chunk files에 대한 shuffling
+    - 순서 전반의 데이터 형식 조정 ( 전달 형식?  List(tuple) )
+- 김은채
+    - initDataSending 함수 구현
+    - Sampling 테스트 로직 구현
+- 조은국
+    - 각 서버에서 Sort 함수 (rough)
+    - 서버에서 데이터 전달 테스트 (진행중 → )
+
+**Goal of the week for individual**
+
+(금요알 대면 미팅 이전까지 ~)
+
+- 이창우(Shuffling**)**
+    - Shuffling 완성
+    - 전체 테스트 로직 구상
+- 김은채(Sampling)
+    - 초기 서버 구축 코드 작성
+- 조은국(Sorting)
+    - 서버간 데이터 전달 코드 완성
+    - sort 조정
+- 공통
+    - 구현한 모듈 합치기
+    - 전체 테스트 로직 구현
