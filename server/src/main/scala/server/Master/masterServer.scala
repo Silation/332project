@@ -9,47 +9,42 @@ import scalapb.zio_grpc.{ServerMain, ServiceList, ZManagedChannel}
 
 import zio.Duration._
 import zio.stream.{Stream, ZStream}
-import io.grpc.ServerBuilder
+import io.grpc.{Server, ServerBuilder}
 import io.grpc.Status
 import zio.stream.ZSink
-import scalapb.zio_grpc.Server
+// import scalapb.zio_grpc.Server
 import scalapb.zio_grpc.ServerLayer
 import zio.Console.{print, printLine}
 
-import sortRPC.customSort.{emptySig, connectionSig, SortFinishSig, pivotVal, MergeFinishSig}
+import sortRPC.customSort.{emptySig, connectionSig, SortFinishSig, pivotVal, MergeFinishSig, WorkerNum}
 
 import scala.io.Source.fromFile
 import java.io._
 
 import java.util.logging.Logger
 
-import io.grpc.{Server, ServerBuilder}
-
 import scala.concurrent.{ExecutionContext, Future}
 
 
 
-trait ZMasterImpl[R, Context] {
-  def WorkerConnection(request: connectionSig):
+object MasterImpl {
+  var a = -1
+  def WorkerConnection(request: connectionSig): WorkerNum = {
+    a = a + 1
+    new WorkerNum(a)
+  }
     // ZIO[R with Context, Status, emptySig]
-    ZIO.succeed( emptySig( ) )
+    // ZIO.succeed(emptySig())
 
 
-  def Sampling(request: SortFinishSig):
+  def Sampling(request: SortFinishSig): pivotVal = new pivotVal("string key for each worker")
     // ZIO[R with Context, Status, pivotVal]
-    ZIO.succeed(pivotVal( "string key for each worker" ))
+    // ZIO.succeed(pivotVal( "string key for each worker" ))
 
-  def MergeFinish(request: MergeFinishSig):
+  def MergeFinish(request: MergeFinishSig): emptySig = new emptySig
     // ZIO[R with Context, Status, emptySig]
-    ZIO.succeed( emptySig( ) )
+    // ZIO.succeed( emptySig( ) )
 }
-
-//object ZMasterImpl {
-
-//}
-
-trait MasterImpl extends ZMasterImpl {}
-
 
 object MasterServer extends ServerMain {
   private val logger = Logger.getLogger(classOf[MasterServer].getName)
@@ -60,8 +55,9 @@ object MasterServer extends ServerMain {
     server.blockUntilShutdown()
   }
 
-  override def port: Int = 8980
+  private val port: Int = 50051
 
+  /*
   def services: ServiceList[Any] = ServiceList.add(MasterImpl)
 
   def serverWait: ZIO[Any, Throwable, Unit] =
@@ -70,15 +66,11 @@ object MasterServer extends ServerMain {
       _ <- (print(".") *> ZIO.sleep(1.second)).forever
     } yield ()
 
-  def serverLive(port: Int): Layer[Throwable, Server] =
-    Clock.live >>> GreeterService.live >>> ServerLayer.access[Greeter](
-      ServerBuilder.forPort(port)
-    )
-
   def run = myAppLogic.exitCode
 
   val myAppLogic =
     serverWait.provideLayer(serverLive(9090))
+    */
 
   /*
   val featuresDatabase = JsonFormat.fromJsonString[FeatureDatabase](
