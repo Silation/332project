@@ -79,7 +79,7 @@ class MasterClient (host: String, port: Int, fileDirectory: String) {
   def fileRead(workerNum: Integer): List[String] = {
 
     try {
-      val filePath = "fileDirectory"
+      val filePath = fileDirectory
       //val filePath = "data" + workerNum.toString + "/test_input.txt"
         List() ++ (          
           for{                                
