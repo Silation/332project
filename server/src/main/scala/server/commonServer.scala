@@ -14,10 +14,14 @@ import java.util.logging.Logger
 import scala.concurrent.{ExecutionContext, Future}
 import scala.collection.mutable.ArrayBuffer
 
+import java.util.concurrent.CountDownLatch
+
 
 abstract class CommonServer(executionContext: ExecutionContext, port: Int) { self =>
-  val TotalWorkerNumber = 5
-
+  val TotalWorkerNumber = 3
+  val latch1=new CountDownLatch(TotalWorkerNumber)
+  val latch2=new CountDownLatch(TotalWorkerNumber)
+  val finishLatch=new CountDownLatch(TotalWorkerNumber)
 
   private val logger = Logger.getLogger(classOf[CommonServer].getName)
   val server = ServerBuilder.forPort(port).addService(MWSignalGrpc.bindService(new MWSignalImpl, executionContext)).build.start
@@ -25,26 +29,29 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int) { sel
   def start(): Unit = {
     logger.info("Server started, listening on " + this.port)
     sys.addShutdownHook {
-      System.err.println("*** shutting down gRPC server since JVM is shutting down")
       self.stop()
-      System.err.println("*** server shut down")
     }
   }
 
   def stop(): Unit = {
     if (server != null) {
       server.shutdown()
+      server.awaitTermination()
+      System.err.println("*** server shut down")
     }
   }
 
   def blockUntilShutdown(): Unit = {
     if (server != null) {
+      finishLatch.await()
+      server.shutdown()
+      server.awaitTermination()
       server.awaitTermination()
     }
   }
 
   private class MWSignalImpl extends MWSignalGrpc.MWSignal {
-    var a = -1
+    var a = 0
 
     override def workerConnection(req: connectionSig) = {
       a = a + 1
@@ -57,28 +64,31 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int) { sel
       Future.successful(reply)
     }
 
+     override def connectionFinish(req:emptySig)={
+      latch1.countDown()
+      latch1.await()
+      val reply=emptySig()
+      Future.successful(reply)
+    }
+
 
     val accumulatedList = ArrayBuffer[String]()
 
     override def sampling(req: sampleValues): Future[pivotVal] = {
       accumulatedList ++= req.key.toList
-      println("accumulated keys to worker" + req.workerNumber + ": " + accumulatedList)
 
       /* ---------------- 모든 worker로부터 key 받아올 때까지 기다림 ----------------*/
+      println("\nSampling: Waiting for other connections...")
+      latch2.countDown()
+      latch2.await()
+      println("success\n")
 
-      val portion: Integer = (accumulatedList.length * req.workerNumber) /TotalWorkerNumber
-      /*
-      val reply = pivotVal
-        portion match {
-            case Ex1(b) if (b > 10) => println("Case 1")
-            case Ex1(b) if (b == 5) => println("Case 2")
-            case Ex2(3) => println("Case 3")
-            case Ex2(b) => println("Case 4")
-      }
-      */
-      println("key Index of worker: " + portion)
-      println("List Length: " + accumulatedList.length)
-      Future.successful(pivotVal(accumulatedList.sortWith(_ < _)(portion)) )//reply)
+      val portion: Float = accumulatedList.length /TotalWorkerNumber
+
+      val pivotList =
+        for(i <- 1 to TotalWorkerNumber-1)
+        yield accumulatedList.sortWith(_ < _)( (portion * i).toInt )
+      Future.successful(pivotVal(pivotList))//reply)
     }
       
     // : pivotVal = new pivotVal("string key for each worker")
@@ -86,7 +96,7 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int) { sel
     override def mergeFinish(req: MergeFinishSig): Future[emptySig] = {
       val reply = emptySig()
       val WorkerNum = req.workerNumber
-      
+      finishLatch.countDown()
       println(" worker" + WorkerNum +  "finished \n")
       Future.successful(reply)
     }
