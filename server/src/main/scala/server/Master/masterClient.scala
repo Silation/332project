@@ -148,8 +148,13 @@ class MasterClient (host: String, port: Int, fileDirectory: String, outputDirect
     val sorted_lines = Lines.sorted
 
 //    val filename = fileDirectory + "_sorted.txt"
+
     val filename = outputDirectory
     val file = new File(filename)
+    if (!file.exists()) {
+      // Create the file if it doesn't exist
+      file.createNewFile()
+    }
     val bw = new BufferedWriter(new FileWriter(file))
     for (line <- sorted_lines) { bw.write(line + '\n') }
     bw.close()
