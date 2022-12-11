@@ -31,12 +31,15 @@ ex) sbt "run slave 2.2.2.111:50052 -I ../data/data1/test_input.txt ../data/data2
 # Result
 
 master(vm11. 2.2.2.111:50052)
-
+![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/1.png)
 worker
+![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/2.png)
 
 vm09. 2.2.2.109:22
+![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/3.png)
 
 
 vm01. 2.2.2.101:22
+![MapReduce](Weekly%20Progress%206b31ccb2ff7c415b87200bb912974191/4.png)
 
 vm10. 2.2.2.110:22
