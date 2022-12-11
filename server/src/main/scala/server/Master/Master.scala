@@ -33,7 +33,7 @@ object entryPoint {
       // worker 호출
       val (masterIP, masterPort, inputDirsPath, outputDirPath, workerIP) = parse(args)
       println(masterIP, masterPort, inputDirsPath(0), outputDirPath, workerIP)
-      val worker = new MasterClient(masterIP, 50052, inputDirsPath(0))
+      val worker = new MasterClient(masterIP, 50052, inputDirsPath(0), outputDirPath)
       worker.start()
     }
     else {

@@ -22,7 +22,7 @@ import serverConnection._
 import java.net._
 
 
-class MasterClient (host: String, port: Int, fileDirectory: String) {
+class MasterClient (host: String, port: Int, fileDirectory: String, outputDirectory: String) {
   private val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
   private val blockingStub = MWSignalGrpc.blockingStub(channel)
   private[this] val logger = Logger.getLogger(classOf[MasterClient].getName)
@@ -147,7 +147,8 @@ class MasterClient (host: String, port: Int, fileDirectory: String) {
     /*------------sampling function--------------*/
     val sorted_lines = Lines.sorted
 
-    val filename = fileDirectory + "_sorted.txt" 
+//    val filename = fileDirectory + "_sorted.txt"
+    val filename = outputDirectory
     val file = new File(filename)
     val bw = new BufferedWriter(new FileWriter(file))
     for (line <- sorted_lines) { bw.write(line + '\n') }
