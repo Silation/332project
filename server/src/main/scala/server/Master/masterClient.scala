@@ -66,7 +66,7 @@ object MasterClient {
   }
 }
 
-class MasterClient private(
+class MasterClient(
   private val channel: ManagedChannel,
   private val blockingStub: MWSignalBlockingStub
 ) {

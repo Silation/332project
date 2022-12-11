@@ -15,8 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 import scala.collection.mutable.ArrayBuffer
 
 
-abstract class CommonServer(executionContext: ExecutionContext, port: Int) { self =>
-  val TotalWorkerNumber = 5
+abstract class CommonServer(executionContext: ExecutionContext, port: Int, TotalWorkerNumber: Int) { self =>
 
 
   private val logger = Logger.getLogger(classOf[CommonServer].getName)

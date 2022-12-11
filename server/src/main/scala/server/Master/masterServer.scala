@@ -23,10 +23,10 @@ object MasterServer{
   private val port: Int = 50051
   
   def main(args: Array[String]): Unit = {
-    val server = new MasterServer(ExecutionContext.global, port)
+    val server = new MasterServer(ExecutionContext.global, port, TotalWorkerNumber)
     server.start()
     server.blockUntilShutdown()
   }
 }
 
-class MasterServer(executionContext: ExecutionContext, port: Int) extends serverConnection.CommonServer(executionContext: ExecutionContext, port: Int)
+class MasterServer(executionContext: ExecutionContext, port: Int, TotalWorkerNumber: Int) extends serverConnection.CommonServer(executionContext: ExecutionContext, port: Int, TotalWorkerNumber: Int)
