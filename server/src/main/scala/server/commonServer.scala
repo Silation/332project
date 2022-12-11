@@ -20,7 +20,6 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int) { sel
 
 
   private val logger = Logger.getLogger(classOf[CommonServer].getName)
-  logger.setLevel(Level.INFO)
   val server = ServerBuilder.forPort(port).addService(MWSignalGrpc.bindService(new MWSignalImpl, executionContext)).build.start
 
   def start(): Unit = {
