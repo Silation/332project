@@ -37,7 +37,13 @@ object MasterClient {
 
 
   def main(args: Array[String]): Unit = {
-
+//    val numWorkers = args(0).toInt
+//    val server = new ConnectionServer(ExecutionContext.global, numWorkers, port)
+//    logger.info("master IP : " + InetAddress.getLocalHost.getHostAddress)
+//    server.start()
+//    server.blockUntilShutdown()
+    val (masterHost, masterPort, inputDirs, outputDir, bindingPort) = parseArgs(args)
+    val thisWorkerRpcPort = if (bindingPort.isDefined) bindingPort.get else defaultWorkerRpcPort
     /*------------workerConnection function--------------*/
     val client = MasterClient("localhost", 50051)
     var workerNum = 0
@@ -72,6 +78,7 @@ class MasterClient private(
   private val blockingStub: MWSignalBlockingStub
 ) {
   private[this] val logger = Logger.getLogger(classOf[MasterClient].getName)
+  logger.setLevel(Level.INFO)
 
   def shutdown(): Unit = {
     channel.shutdown.awaitTermination(5, TimeUnit.SECONDS)
@@ -80,7 +87,7 @@ class MasterClient private(
 
   /* -------------- rpc functions ------------------ */
   def workerConnection(ip: String, port: Integer): Integer = {
-    logger.info("connecting from " + ip + "...")
+    logger.info("connecting from " + "" + bindingPort.get)
 
     val request = connectionSig(workerIP=ip, port=port)
     try {
