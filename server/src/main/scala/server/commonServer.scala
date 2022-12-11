@@ -18,9 +18,9 @@ import java.util.concurrent.CountDownLatch
 
 
 abstract class CommonServer(executionContext: ExecutionContext, port: Int, TotalWorkerNumber: Int) { self =>
-  val latch1=new CountDownLatch(TotalWorkerNumber)
-  val latch2=new CountDownLatch(TotalWorkerNumber)
-  val finishLatch=new CountDownLatch(TotalWorkerNumber)
+  val ConnectionLatch=new CountDownLatch(TotalWorkerNumber)
+  val SamplingLatch=new CountDownLatch(TotalWorkerNumber)
+  val FinishLatch=new CountDownLatch(TotalWorkerNumber)
 
   private val logger = Logger.getLogger(classOf[CommonServer].getName)
   val server = ServerBuilder.forPort(port).addService(MWSignalGrpc.bindService(new MWSignalImpl, executionContext)).build.start
@@ -42,7 +42,7 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int, Total
 
   def blockUntilShutdown(): Unit = {
     if (server != null) {
-      finishLatch.await()
+      FinishLatch.await()
       server.shutdown()
       server.awaitTermination()
       server.awaitTermination()
@@ -64,8 +64,8 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int, Total
     }
 
      override def connectionFinish(req:emptySig)={
-      latch1.countDown()
-      latch1.await()
+      ConnectionLatch.countDown()
+      ConnectionLatch.await()
       val reply=emptySig()
       Future.successful(reply)
     }
@@ -78,8 +78,8 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int, Total
 
       /* ---------------- 모든 worker로부터 key 받아올 때까지 기다림 ----------------*/
       println("\nSampling: Waiting for other connections...")
-      latch2.countDown()
-      latch2.await()
+      SamplingLatch.countDown()
+      SamplingLatch.await()
       println("success\n")
 
       val portion: Float = accumulatedList.length /TotalWorkerNumber
@@ -95,15 +95,11 @@ abstract class CommonServer(executionContext: ExecutionContext, port: Int, Total
     override def mergeFinish(req: MergeFinishSig): Future[emptySig] = {
       val reply = emptySig()
       val WorkerNum = req.workerNumber
-      finishLatch.countDown()
+      FinishLatch.countDown()
       println(" worker" + WorkerNum +  "finished \n")
       Future.successful(reply)
     }
     
     // : emptySig = new emptySig
   }
-}
-
-object CommonServer {
-
 }

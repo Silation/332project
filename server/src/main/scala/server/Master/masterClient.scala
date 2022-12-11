@@ -1,5 +1,5 @@
 // sbt "runMain MasterServer"
-package master.client
+package worker.client
 
 import java.util.concurrent.TimeUnit
 import java.util.logging.{Level, Logger}
@@ -22,10 +22,10 @@ import serverConnection._
 import java.net._
 
 
-class MasterClient (host: String, port: Int, fileDirectory: String, outputDirectory: String) {
+class WorkerClient (host: String, port: Int, fileDirectory: String, outputDirectory: String) {
   private val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
   private val blockingStub = MWSignalGrpc.blockingStub(channel)
-  private[this] val logger = Logger.getLogger(classOf[MasterClient].getName)
+  private[this] val logger = Logger.getLogger(classOf[WorkerClient].getName)
 
   def shutdown(): Unit = {
     channel.shutdown.awaitTermination(5, TimeUnit.SECONDS)
