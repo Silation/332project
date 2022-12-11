@@ -28,3 +28,15 @@ sbt "run slave 2.2.2.111:50052 -I <input data relative path> <input data relativ
 ex) sbt "run slave 2.2.2.111:50052 -I ../data/data1/test_input.txt ../data/data2/test_input.txt -O /data/output/test_ouput.txt"
 ```
 
+# Result
+
+master(vm11. 2.2.2.111:50052)
+
+worker
+
+vm09. 2.2.2.109:22
+
+
+vm01. 2.2.2.101:22
+
+vm10. 2.2.2.110:22
