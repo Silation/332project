@@ -17,8 +17,7 @@ import scala.collection.mutable.ArrayBuffer
 import java.util.concurrent.CountDownLatch
 
 
-abstract class CommonServer(executionContext: ExecutionContext, port: Int) { self =>
-  val TotalWorkerNumber = 3
+abstract class CommonServer(executionContext: ExecutionContext, port: Int, TotalWorkerNumber: Int) { self =>
   val latch1=new CountDownLatch(TotalWorkerNumber)
   val latch2=new CountDownLatch(TotalWorkerNumber)
   val finishLatch=new CountDownLatch(TotalWorkerNumber)
