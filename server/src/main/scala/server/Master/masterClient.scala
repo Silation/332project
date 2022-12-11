@@ -33,7 +33,7 @@ object MasterClient {
 }
 */
 
-class MasterClient (host: String, port: Int) {
+class MasterClient (host: String, port: Int, fileDirectory: String) {
   private val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
   private val blockingStub = MWSignalGrpc.blockingStub(channel)
   private[this] val logger = Logger.getLogger(classOf[MasterClient].getName)
@@ -79,7 +79,7 @@ class MasterClient (host: String, port: Int) {
   def fileRead(workerNum: Integer): List[String] = {
 
     try {
-      val filePath = "data" + workerNum.toString + "/input"
+      val filePath = "fileDirectory"
       //val filePath = "data" + workerNum.toString + "/test_input.txt"
         List() ++ (          
           for{                                
