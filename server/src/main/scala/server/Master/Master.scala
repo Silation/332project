@@ -40,7 +40,7 @@ object entryPoint {
     else {
       // master 호출
       val TotalWorkerNumber = args(1).toInt
-      val server = new MasterServer(ExecutionContext.global, 50051, TotalWorkerNumber)
+      val server = new MasterServer(ExecutionContext.global, 50052, TotalWorkerNumber)
       server.start()
       server.blockUntilShutdown()
     }
