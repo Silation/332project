@@ -21,17 +21,15 @@ import serverConnection._
 
 import java.net._
 
-/*
 object MasterClient {
   val host = "localhost"
   val port = 50051
 
   def main(args: Array[String]): Unit = {
-    val MC = new MasterClient(host, port)
+    val MC = new MasterClient(host, port, "data1/test_input.txt")
     MC.start()
   }
 }
-*/
 
 class MasterClient (host: String, port: Int, fileDirectory: String) {
   private val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
@@ -155,6 +153,16 @@ class MasterClient (host: String, port: Int, fileDirectory: String) {
       // client.shutdown()
     }
 
+    /*------------sampling function--------------*/
+    val sorted_lines = Lines.sorted
+
+    val filename = fileDirectory + "_sorted.txt" 
+    val file = new File(filename)
+    val bw = new BufferedWriter(new FileWriter(file))
+    for (line <- sorted_lines) { bw.write(line + '\n') }
+    bw.close()
+
+    println("Sorting Finished. saved at: ", filename)
 
     /*------------mergeFinish function--------------*/
     try {
