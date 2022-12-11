@@ -21,60 +21,21 @@ import serverConnection._
 
 import java.net._
 
-
+/*
 object MasterClient {
-  def apply(host: String, port: Int): MasterClient = {
-    val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
-    val blockingStub = MWSignalGrpc.blockingStub(channel)
-    new MasterClient(channel, blockingStub)
-  }
-
-
-  val localhost: InetAddress = InetAddress.getLocalHost
-  val localIpAddress: String = localhost.getHostAddress
-  val clientPort: Integer = 80 //InetSocketAddress(localhost).getPort //.getLocalHost.getPort
-    //30 //InetSocketAddress.getPort()
-
+  val host = "localhost"
+  val port = 50051
 
   def main(args: Array[String]): Unit = {
-
-    /*------------workerConnection function--------------*/
-    val client = MasterClient("localhost", 50051)
-    var workerNum = 0
-    
-    try {
-      workerNum = client.workerConnection(ip=localIpAddress, port=clientPort)
-    } finally {}
-     try{
-      client.WaitforOtherConnections()
-    }finally{}
-
-
-    val Lines = client.fileRead(workerNum)
-
-    /*------------sampling function--------------*/
-    val SampleVal = List(Lines(0), Lines(1), Lines(2), Lines(3), Lines(4), Lines(5), Lines(6), Lines(7), Lines(8), Lines(9))
-    try {
-      val pivotString = client.sampling(SampleVal, workerNum)
-    } finally {
-      // client.shutdown()
-    }
-
-
-    /*------------mergeFinish function--------------*/
-    try {
-      client.mergeFinish(workerNum)
-    } finally {
-      client.shutdown()
-    }
+    val MC = new MasterClient(host, port)
+    MC.start()
   }
 }
+*/
 
-
-class MasterClient private(
-  private val channel: ManagedChannel,
-  private val blockingStub: MWSignalBlockingStub
-) {
+class MasterClient (host: String, port: Int) {
+  private val channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build
+  private val blockingStub = MWSignalGrpc.blockingStub(channel)
   private[this] val logger = Logger.getLogger(classOf[MasterClient].getName)
 
   def shutdown(): Unit = {
@@ -161,4 +122,44 @@ class MasterClient private(
         logger.log(Level.WARNING, "RPC failed: {0}", e.getStatus)
     }
   }
+
+
+
+
+  def start(): Unit = {
+
+
+    val localhost: InetAddress = InetAddress.getLocalHost
+    val localIpAddress: String = localhost.getHostAddress
+    val clientPort: Integer = port
+
+    
+    /*------------workerConnection function--------------*/
+    var workerNum = 0
+    
+    try {
+      workerNum = this.workerConnection(ip=localIpAddress, port=clientPort)
+    } finally {}
+     try{
+      this.WaitforOtherConnections()
+    }finally{}
+
+
+    val Lines = this.fileRead(workerNum)
+
+    /*------------sampling function--------------*/
+    val SampleVal = List(Lines(0), Lines(1), Lines(2), Lines(3), Lines(4), Lines(5), Lines(6), Lines(7), Lines(8), Lines(9))
+    try {
+      val pivotString = this.sampling(SampleVal, workerNum)
+    } finally {
+      // client.shutdown()
+    }
+
+
+    /*------------mergeFinish function--------------*/
+    try {
+      this.mergeFinish(workerNum)
+    } finally {
+      this.shutdown()
+    }}
 }
