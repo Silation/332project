@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package sortRPC;
+
+
+// request + reply
+service MWSignal {
+  rpc workerConnection (connectionSig) returns (WorkerNum) {}
+  rpc sampling (sampleValues) returns (pivotVal) {}
+  rpc mergeFinish (MergeFinishSig) returns (emptySig) {}
+  
+  rpc connectionFinish (emptySig) returns (emptySig) {}
+}
+
+message WorkerNum{
+  int32 number = 1;
+}
+
+message emptySig {
+}
+
+message connectionSig {
+  string workerIP = 1;
+  int32 port = 2;
+}
+
+message sampleValues {
+  repeated string key = 1;
+  int32 workerNumber = 2;
+}
+
+message pivotVal {
+  repeated string pivotOfWorker = 1;
+}
+
+message MergeFinishSig {
+  int32 workerNumber = 1;
+}
+
